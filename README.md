@@ -1,2 +1,0 @@
-# firefighters
-UGT &amp; firefighters
