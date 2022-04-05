@@ -20,9 +20,7 @@ interface PopupInfo {
   };
 }
 
-const MAP_STYLE = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
-//ttps://api.maptiler.com/maps/8ecc366c-2d3e-45cf-b34d-dfc07d5ef395/style.json?key=8XnO8TF3UjHDY1RKP9jm";
-//process.env.REACT_APP_MAPLIBRE_MAP_STYLE || "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
+const MAP_STYLE = "https://api.maptiler.com/maps/54bf9144-972f-442a-81e7-2bdc28f7f216/style.json?key=8XnO8TF3UjHDY1RKP9jm";
 
 export const Map = () => {
   const { t } = useTranslation();
