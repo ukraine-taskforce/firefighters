@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import MapComponent, { Popup, MapRef, MapLayerMouseEvent, Layer, Source } from "react-map-gl";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -8,6 +7,8 @@ import { Box, Typography } from "@mui/material";
 import { useCallback, useState, useRef } from "react";
 import { INITIAL_CENTER_VIEW } from '../../constants';
 import { layerStyle } from './CircleLayerStyle';
+import { fakeData } from "../../fixtures/fakeDonations";
+import { mapToFeatures, FirestationWithData } from "../../helpers/donations";
 
 interface PopupInfo {
   latitude: number;
@@ -15,7 +16,7 @@ interface PopupInfo {
   data: {
     id: string;
     description: string;
-    city: string;
+    name: string;
     totalItems: number;
   };
 }
@@ -23,7 +24,6 @@ interface PopupInfo {
 const MAP_STYLE = "https://api.maptiler.com/maps/54bf9144-972f-442a-81e7-2bdc28f7f216/style.json?key=8XnO8TF3UjHDY1RKP9jm";
 
 export const Map = () => {
-  const { t } = useTranslation();
   const mapRef = useRef<MapRef>(null);
   const [popupInfo, setPopupInfo] = useState<PopupInfo | null>(null);
   const [cursor, setCursor] = useState<"auto" | "pointer">("auto");
@@ -55,7 +55,7 @@ export const Map = () => {
             latitude: event.lngLat.lat,
             data: {
               id: popupId,
-              city: requestData.city,
+              name: requestData.name,
               description: requestData.description,
               totalItems: requestData.amount,
             },
@@ -68,7 +68,7 @@ export const Map = () => {
 
   const data: FeatureCollection<Geometry, GeoJsonProperties> = {
     type: "FeatureCollection",
-    features: [],
+    features: mapToFeatures(fakeData),
   };
 
   return (
@@ -103,7 +103,7 @@ export const Map = () => {
               {popupInfo.data ? (
                 <>
                   <Typography variant="h6" component="div">
-                    {popupInfo.data.city}: {popupInfo.data.totalItems} {t("requests")}
+                    {popupInfo.data.name}: {popupInfo.data.totalItems}
                   </Typography>
                   <Typography variant="body1" style={{ whiteSpace: "pre-line" }}>
                     {popupInfo.data.description}
