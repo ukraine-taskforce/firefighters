@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import { SidebarContextProvider } from "./others/contexts/sidebar-context";
 import { muiTheme } from "./styles/theme";
 
 import "./index.css";
@@ -13,7 +14,9 @@ import { NotFound } from "./pages/notFound";
 
 const Providers: React.FunctionComponent = ({ children }) => (
   <MuiThemeProvider theme={muiTheme}>
-    {children}
+    <SidebarContextProvider>
+      {children}
+    </SidebarContextProvider>
   </MuiThemeProvider>
 );
 
