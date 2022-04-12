@@ -8,7 +8,7 @@ import { useCallback, useState, useRef } from "react";
 import { INITIAL_CENTER_VIEW } from '../../constants';
 import { layerStyle } from './CircleLayerStyle';
 import { fakeData } from "../../fixtures/fakeDonations";
-import { mapToFeatures, FirestationWithData } from "../../helpers/donations";
+import { mapToFeatures } from "../../helpers/donations";
 
 interface PopupInfo {
   latitude: number;
